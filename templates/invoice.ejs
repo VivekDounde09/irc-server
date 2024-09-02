@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabcart</title>
+    <style>
+        body {
+            background-color: #F6F6F6;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .brand-section {
+            background-color: #0d1033;
+            padding: 10px 40px;
+        }
+
+        .logo {
+            width: 50%;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-6 {
+            width: 50%;
+            flex: 0 0 auto;
+        }
+
+        .text-white {
+            color: #fff;
+        }
+
+        .company-details {
+            float: right;
+            text-align: right;
+        }
+
+        .body-section {
+            padding: 16px;
+            border: 1px solid gray;
+        }
+
+        .heading {
+            font-size: 20px;
+            margin-bottom: 08px;
+        }
+
+        .sub-heading {
+            color: #262626;
+            margin-bottom: 05px;
+        }
+
+        table {
+            background-color: #fff;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table thead tr {
+            border: 1px solid #111;
+            background-color: #f2f2f2;
+        }
+
+        table td {
+            vertical-align: middle !important;
+            text-align: center;
+        }
+
+        table th,
+        table td {
+            padding-top: 08px;
+            padding-bottom: 08px;
+        }
+
+        .table-bordered {
+            box-shadow: 0px 0px 5px 0.5px gray;
+        }
+
+        .table-bordered td,
+        .table-bordered th {
+            border: 1px solid #dee2e6;
+        }
+
+        .text-right {
+            text-align: end;
+        }
+
+        .w-20 {
+            width: calc(100% / 9);
+        }
+
+        .float-right {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="brand-section">
+            <div class="row">
+                <div class="col-6">
+                    <h1 class="text-white">Brickschain</h1>
+                </div>
+                <div class="col-6">
+                    <div class="company-details">
+                        <p class="text-white">STPI, Gala no. 5, Electronics Sadan III MIDC Indl Estate, Bhosari, Pune
+                        </p>
+                        <p class="text-white">MIDC Indl Estate, Bhosari, Pune</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="body-section">
+            <div class="row">
+                <!-- <div class="col-6">
+                    <h2 class="heading">Invoice No.: 001</h2>
+                    <p class="sub-heading">Tracking No. fabcart2025 </p>
+                    <p class="sub-heading">Order Date: 20-20-2021 </p>
+                    <p class="sub-heading">Email Address: customer@gfmail.com </p>
+                </div> -->
+                <!-- <div class="col-6">
+                    <p class="sub-heading">Full Name: </p>
+                    <p class="sub-heading">Address: </p>
+                    <p class="sub-heading">Phone Number: </p>
+                    <p class="sub-heading">City,State,Pincode: </p>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="body-section">
+            <h3 class="heading">Transaction Invoice</h3>
+            <h2>Transaction Initiated</h2>
+            <br>
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <th class="w-20">Order ID</th>
+                        <th class="w-20">Property <br> Name</th>
+                        <th class="w-20">Fraction <br> Purchase</th>
+                        <th class="w-20">Price Per Fraction <br>(INR)</th>
+                        <th class="w-20">Amount (INR)</th>
+                        <th class="w-20">IRA Token Value (INR)</th>
+                        <th class="w-20">Calculate Gas Fees<br>(IRA)</th>
+                        <th class="w-20">Platform fees %</th>
+                        <th class="w-20">Payment <br> Status</th>
+                        <th class="w-20">Gas <br> Status</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <%= order_id %>
+                        </td>
+                        <td>
+                            <%= title %>
+                        </td>
+                        <td>
+                            <%= fraction_count %>
+                        </td>
+                        <td>
+                            <%= fraction_price %>
+                        </td>
+                        <td>
+                            <%= total_fraction %>
+                        </td>
+                        <td>
+                            <%= ira_token %>
+                        </td>
+                        <td>
+                            <%= gas_fee %>
+                        </td>
+                        <td>
+                            <%= platform_fee %>
+                        </td>
+                        <td>
+                            <%= payment_status %>
+                        </td>
+                        <td>
+                            <%= gas_transfer %>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <br>
+            <!-- <h3 class="heading">Payment Status: Paid</h3>
+            <h3 class="heading">Payment Mode: Cash on Delivery</h3> -->
+        </div>
+
+        <div class="body-section">
+            <p>&copy; Copyright <%= new Date().getFullYear();%> - Brickschain. All rights reserved.
+                    <!-- <a href="https://www.fundaofwebit.com/" class="float-right">www.fundaofwebit.com</a> -->
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>

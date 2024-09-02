@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# vscode config
+.vscode/
+
+# uploads
+uploads/
+
+# server logs
+*.log
+
+.env
+
+services/test.js

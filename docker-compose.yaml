@@ -1,0 +1,71 @@
+version: "3"
+services:
+  mongodb:
+    image: mongo:6
+    container_name: irc-${ENVIRONMENT}-mongo
+    restart: unless-stopped
+    ports:
+      - ${MONGO_PORT}:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - mongo:/data/db
+      - mongo-config:/data/configdb
+  redisdb:
+    image: bitnami/redis
+    user: root
+    container_name: irc-${ENVIRONMENT}-redis
+    restart: unless-stopped
+    ports:
+      - ${REDIS_PORT}:6379
+    environment:
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    volumes:
+      - redis:/bitnami/redis/data
+  mysqldb:
+    image: bitnami/mysql
+    container_name: irc-${ENVIRONMENT}-mysql
+    restart: unless-stopped
+    ports:
+      - ${MYSQL_PORT}:3306
+    environment:
+      - MYSQL_DATABASE=${DATABASE}
+      - MYSQL_USER=${DATABASE_USER}
+      - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+      - MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password
+    volumes:
+      - mysql:/bitnami/mysql/data
+      - ./irc-schema.sql:/docker-entrypoint-startdb.d/irc-schema.sql
+  irc:
+    image: irc-${ENVIRONMENT}
+    build:
+      context: .
+      args:
+        - PORT:${PORT}
+    container_name: irc-${ENVIRONMENT}
+    restart: unless-stopped
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - mongodb
+      - mysqldb
+      - redisdb
+    volumes:
+      - ./uploads:/irc/uploads
+      - ./error.log:/irc/error.log
+      - ./server.log:/irc/server.log
+volumes:
+  mongo:
+    name: irc-${ENVIRONMENT}-mongo
+  mongo-config:
+    name: irc-${ENVIRONMENT}-mongo-config
+  mysql:
+    name: irc-${ENVIRONMENT}-mysql
+  redis:
+    name: irc-${ENVIRONMENT}-redis
+networks:
+  default:
+    name: irc-${ENVIRONMENT}
